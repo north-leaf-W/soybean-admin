@@ -1,3 +1,12 @@
+# 模板介绍
+
+| 项目信息       | 详情                                                                                  |
+| -------------- | ------------------------------------------------------------------------------------- |
+| 原始项目地址   | [ mhyfritz/astro-landing-page](https://github.com/mhyfritz/astro-landing-page)](https://github.com/soybeanjs/soybean-admin)                                 |
+| 原始项目Stars   | [![github stars](https://img.shields.io/github/stars/soybeanjs/soybean-admin)](https://github.com/soybeanjs/soybean-admin) |
+ 
+---
+
 <div align="center">
 	<img src="./public/favicon.svg" width="160" />
 	<h1>SoybeanAdmin</h1>
