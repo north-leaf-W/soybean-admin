@@ -13,6 +13,14 @@ app.use(express.json());
 // JWT密钥
 const JWT_SECRET = process.env.AUTH_SECRET_KEY || 'soybean-admin-secret-key';
 
+// 添加到index.js开头部分，在其他app.use()之后
+app.use((req, res, next) => {
+  if (req.path.includes(':1')) {
+    req.url = req.url.replace(':1', '');
+  }
+  next();
+});
+
 // 模拟用户数据
 const users = {
   'Soybean': {
