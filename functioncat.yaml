@@ -45,7 +45,7 @@ apps:
       prod:
         build:
           root_path: .
-          script: pnpm install; pnpm build
+          script: pnpm install && pnpm add @iconify/utils -D && pnpm build
         provision:
           root_path: dist
           type: nodejs18x
