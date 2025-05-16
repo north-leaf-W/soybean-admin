@@ -1,0 +1,99 @@
+system: 1.0.0 
+info:
+  name: Soybean Admin
+  description: 清新优雅、高颜值且功能强大的Vue3后台管理模板
+  vars:
+    MOCK_API_KEY:
+      description: >-
+        ApiFox的Mock API Key，用于在线Mock数据服务
+    AUTH_SECRET_KEY:
+      description: >-
+        认证服务的Secret Key
+    STORE_SVC_API_KEY:
+      description: "存储服务的API KEY"
+envs:
+  dev:
+    branch: dev
+  prod:
+    branch: main
+routes:
+  main_env: prod
+  main_app: admin
+auths:
+  apikey:
+    type: api_key
+    envs:
+      dev:
+        in: header
+        name: Authorization
+        value: ${{vars.AUTH_SECRET_KEY}}
+      prod:
+        in: header
+        name: Authorization
+        value: ${{vars.AUTH_SECRET_KEY}}
+apps:
+  admin:
+    type: web_frontend
+    envs:
+      dev:
+        build:
+          root_path: .
+          script: pnpm install; pnpm dev
+        provision:
+          root_path: dist
+          type: nodejs18x
+      prod:
+        build:
+          root_path: .
+          script: pnpm install; pnpm build
+        provision:
+          root_path: dist
+          type: nodejs18x
+  mockapi:
+    type: web_api
+    envs:
+      dev:
+        build:
+          root_path: mock-server
+          script: pnpm install
+        provision:
+          type: nodejs18x
+          root_path: mock-server
+          start_command: node index.js
+          timeout: 120
+          vars:
+            - MOCK_API_KEY
+            - AUTH_SECRET_KEY
+      prod:
+        build:
+          root_path: mock-server
+          script: pnpm install
+        provision:
+          type: nodejs18x
+          root_path: mock-server
+          start_command: node index.js
+          timeout: 120
+          vars:
+            - MOCK_API_KEY
+            - AUTH_SECRET_KEY
+services:
+  store:
+    type: kv_store
+    envs:
+      dev:
+        auths:
+          - apikey
+        provision:
+          type: kv_store_v1
+          namespaces:
+            - userauth
+            - usersettings
+      prod:
+        auths:
+          - apikey
+        provision:
+          type: kv_store_v1
+          namespaces:
+            - userauth
+            - usersettings
+            - permissions
