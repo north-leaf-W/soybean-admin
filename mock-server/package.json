@@ -1,13 +1,14 @@
 {
   "name": "soybean-admin-mock-server",
   "version": "1.0.0",
-  "description": "Mock API server for Soybean Admin",
+  "description": "Soybean Admin Mock API服务",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0"
   }
