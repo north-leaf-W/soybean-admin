@@ -45,7 +45,7 @@ apps:
       prod:
         build:
           root_path: .
-          script: pnpm install; npm install @iconify/utils --save-dev; npm run build
+          script: pnpm install; npm install @iconify/utils --save-dev --force; export NODE_PATH=$(npm root -g):$NODE_PATH; npm run build
         provision:
           root_path: dist
           type: nodejs18x
