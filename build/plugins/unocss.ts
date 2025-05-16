@@ -17,7 +17,9 @@ function simpleFileSystemIconLoader(dir: string, transform?: (svg: string) => st
 }
 
 export function setupUnocss(viteEnv: Env.ImportMeta) {
-  const { VITE_ICON_PREFIX, VITE_ICON_LOCAL_PREFIX } = viteEnv;
+  // 添加默认值，防止环境变量未定义
+  const VITE_ICON_PREFIX = viteEnv.VITE_ICON_PREFIX || 'icon';
+  const VITE_ICON_LOCAL_PREFIX = viteEnv.VITE_ICON_LOCAL_PREFIX || 'icon-local';
 
   const localIconPath = path.join(process.cwd(), 'src/assets/svg-icon');
 
